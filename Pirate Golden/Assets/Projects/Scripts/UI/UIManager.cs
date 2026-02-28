@@ -16,7 +16,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI totalEarnedText;
 
     [Header("Next Unlock")]
-    [SerializeField] protected TextMeshProUGUI nextUnlockText;
+    [SerializeField] private TextMeshProUGUI nextUnlockText;
+    [SerializeField] private TextMeshProUGUI percentText;
+    [SerializeField] private Image progressFillImage;
 
     [Header("Notification")]
     [SerializeField] private TextMeshProUGUI notificationText;
@@ -57,6 +59,7 @@ public class UIManager : MonoBehaviour
 
         InitSlots();
         RefreshAllSlots();
+        RefreshAllHUD();
     }
 
     private void OnDestroy()
@@ -104,11 +107,17 @@ public class UIManager : MonoBehaviour
         if (next == null)
         {
             nextUnlockText.text = "All upgrades unlocked!";
+            if (progressFillImage) progressFillImage.fillAmount = 1f;
             return;
         }
 
-        float pct = Mathf.Clamp01((float)(earned / next.definition.unlockAtCoinsEarned));
-        nextUnlockText.text = $"Next: {next.definition.upgradeName} ({pct * 100f:F0}%)";
+        float pct = Mathf.Clamp01(
+            (float)(earned / next.definition.unlockAtCoinsEarned));
+
+        nextUnlockText.text = $"Next: {next.definition.upgradeName}";
+        percentText.text = $"({pct * 100f:F0}%)";
+
+        if (progressFillImage) progressFillImage.fillAmount = pct;
     }
 
     private void InitSlots()

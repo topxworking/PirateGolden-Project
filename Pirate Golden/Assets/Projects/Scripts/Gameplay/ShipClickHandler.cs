@@ -52,8 +52,8 @@ public class ShipClickHandler : MonoBehaviour, IPointerClickHandler, IPointerDow
     private void PlayFeedback()
     {
         if (usePunchScale) { _punching = true; _punchT = 0f; }
-        if (shipAnimator && !string.IsNullOrEmpty(clickAnimTrigger))
-            shipAnimator.SetTrigger(clickAnimTrigger);
+        //if (shipAnimator && !string.IsNullOrEmpty(clickAnimTrigger))
+        //    shipAnimator.SetTrigger(clickAnimTrigger);
         if (splashParticle) splashParticle.Play();
     }
 }

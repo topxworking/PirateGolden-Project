@@ -4,8 +4,6 @@ using UnityEngine.EventSystems;
 public class ShipClickHandler : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler
 {
     [Header("Feedback")]
-    [SerializeField] private Animator shipAnimator;
-    [SerializeField] private string clickAnimTrigger = "Click";
     [SerializeField] private ParticleSystem splashParticle;
 
     [Header("Scale Punch")]
@@ -52,8 +50,6 @@ public class ShipClickHandler : MonoBehaviour, IPointerClickHandler, IPointerDow
     private void PlayFeedback()
     {
         if (usePunchScale) { _punching = true; _punchT = 0f; }
-        //if (shipAnimator && !string.IsNullOrEmpty(clickAnimTrigger))
-        //    shipAnimator.SetTrigger(clickAnimTrigger);
         if (splashParticle) splashParticle.Play();
     }
 }

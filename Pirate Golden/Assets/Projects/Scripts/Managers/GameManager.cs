@@ -23,14 +23,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float autoSaveInterval = 30f;
 
     [Header("Passive Tick")]
-    [SerializeField] private float passiveTickRate = 0.1f;
+    [SerializeField] private float passiveTickRate = 1f;
 
     private float _passiveTimer;
     private float _autoSaveTimer;
 
     private void Awake()
     {
-        if (Instance != null && Instance != this) { Destroy(gameObject); }
+        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
@@ -44,11 +44,12 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         _passiveTimer += Time.deltaTime;
-        if (_passiveTimer >= passiveTickRate)
+        while (_passiveTimer >= passiveTickRate)
         {
             double earned = CoinsPerSecond * passiveTickRate;
             if (earned > 0) AddCoins(earned);
-            _passiveTimer = 0f;
+
+            _passiveTimer -= passiveTickRate;
         }
 
         _autoSaveTimer += Time.deltaTime;
@@ -72,7 +73,7 @@ public class GameManager : MonoBehaviour
 
     private void AddCoins(double amount)
     {
-        if (amount < 0) return;
+        if (amount <= 0) return;
         TotalCoins += amount;
         TotalCoinEarned += amount;
         OnCoinChanged?.Invoke(TotalCoins);

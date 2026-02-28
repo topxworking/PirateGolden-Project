@@ -1,16 +1,21 @@
-using UnityEngine;
+using System;
+using System.Collections.Generic;
 
-public class GameData : MonoBehaviour
+[Serializable]
+public class GameData
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public double totalCoins;
+    public double coinsPerClick;
+    public double coinsPerSecond;
+    public double totalCoinsEarned;
+    public double totalClicks;
+    public List<UpgradeSaveData> upgrades = new List<UpgradeSaveData>();
+}
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+[Serializable]
+public class UpgradeSaveData
+{
+    public string id;
+    public int level;
+    public bool unlocked;
 }

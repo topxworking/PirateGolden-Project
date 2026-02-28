@@ -1,16 +1,98 @@
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class UpgradeSlotUI : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [Header("UI References")]
+    [SerializeField] private Image iconImage;
+    [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] private TextMeshProUGUI descText;
+    [SerializeField] private TextMeshProUGUI levelText;
+    [SerializeField] private TextMeshProUGUI effectText;
+    [SerializeField] private TextMeshProUGUI costText;
+    [SerializeField] private Button buyButton;
+    [SerializeField] private GameObject maxBadge;
+
+    private RuntimeUpgrade _runtime;
+
+    private void Awake()
     {
-        
+        buyButton?.onClick.AddListener(OnBuyClicked);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Setup(RuntimeUpgrade runtime)
     {
-        
+        _runtime = runtime;
+
+        if (iconImage && runtime.definition.icon)
+            iconImage.sprite = runtime.definition.icon;
+
+        if (nameText) nameText.text = runtime.definition.upgradeName;
+        if (descText) descText.text = runtime.definition.description;
+
+        Refresh();
+    }
+
+    public void Refresh()
+    {
+        if (_runtime == null) return;
+
+        bool maxed = _runtime.IsMaxLevel;
+
+        if (levelText)
+        {
+            string cap = _runtime.definition.maxLevel > 0
+                ? $"/{_runtime.definition.maxLevel}" : "";
+            levelText.text = $"Level {_runtime.level}{cap}";
+        }
+
+        if (maxBadge) maxBadge.SetActive(maxed);
+
+        if (maxed)
+        {
+            if (costText) costText.text = "MAX";
+            if (buyButton) buyButton.interactable = false;
+        }
+        else
+        {
+            double cost = _runtime.NextCost;
+            bool canAfford = GameManager.Instance.TotalCoins >= cost;
+
+            if (costText) costText.text = $"${GameManager.FormatNumber(cost)}";
+            if (buyButton) buyButton.interactable = canAfford;
+        }
+
+        if (effectText)
+        {
+            var def = _runtime.definition;
+            double curVal = def.GetValueAtLevel(_runtime.level);
+            double nextVal = maxed ? curVal : def.GetValueAtLevel(_runtime.level + 1);
+            string typeLebel = def.upgradeType switch
+            {
+                UpgradeType.ClickPower => "Click +",
+                UpgradeType.PassiveIncome => "Income/s +",
+                UpgradeType.ClickMultiplier => "Click ×+",
+                UpgradeType.PassiveMultiplier => "Income ×+",
+                _ => ""
+            };
+
+            effectText.text = maxed
+                ? $"{typeLebel}{GameManager.FormatNumber(curVal)}"
+                : $"{typeLebel}{GameManager.FormatNumber(curVal)} > {GameManager.FormatNumber(nextVal)}";
+        }
+    }
+
+    private void Update()
+    {
+        if (_runtime == null || _runtime.IsMaxLevel || buyButton == null) return;
+        buyButton.interactable = GameManager.Instance.TotalCoins >= _runtime.NextCost;
+    }
+
+    private void OnBuyClicked()
+    {
+        if (_runtime == null) return;
+        if (UpgradeManager.Instance.TryBuyUpgrade(_runtime.definition.upgradeId))
+            Refresh();
     }
 }

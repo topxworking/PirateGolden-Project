@@ -7,25 +7,29 @@ public class SaveManager : MonoBehaviour
     public static SaveManager Instance { get; private set; }
 
     private const string SAVE_FILE = "pirate_save.json";
-    private string SavePath => Path.Combine(Application.dataPath, SAVE_FILE);
+
+    private string _savePath;
 
     private void Awake()
     {
-        if (Instance != null && Instance != this) { Destroy(gameObject); }
+        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        _savePath = Path.Combine(Application.persistentDataPath, SAVE_FILE);
+        Debug.Log($"Save path: {_savePath}");
     }
 
     public void Save(GameData data)
     {
         string json = JsonUtility.ToJson(data, prettyPrint: true);
-        File.WriteAllText(SAVE_FILE, json);
-        Debug.Log($"Saved > {SavePath}");
+        File.WriteAllText(_savePath, json);
+        Debug.Log("Saved");
     }
 
     public GameData Load()
     {
-        if (!File.Exists(SAVE_FILE))
+        if (!File.Exists(_savePath))
         {
             Debug.Log("No save file found.");
             return CreateDefaultData();
@@ -33,7 +37,7 @@ public class SaveManager : MonoBehaviour
 
         try
         {
-            string json = File.ReadAllText(SavePath);
+            string json = File.ReadAllText(_savePath);
             GameData data = JsonUtility.FromJson<GameData>(json);
             Debug.Log("Save loaded successfully.");
             return data;
@@ -47,9 +51,9 @@ public class SaveManager : MonoBehaviour
 
     public void DeleteSave()
     {
-        if (File.Exists(SavePath))
+        if (File.Exists(_savePath))
         {
-            File.Delete(SavePath);
+            File.Delete(_savePath);
             Debug.Log("Save file deleted.");
         }
     }

@@ -15,27 +15,24 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI totalClicksText;
     [SerializeField] private TextMeshProUGUI totalEarnedText;
 
-    [Header("Unlock Progress")]
-    [SerializeField] private Slider progressSlider;
-    [SerializeField] protected TextMeshProUGUI progressLabel;
+    [Header("Next Unlock")]
+    [SerializeField] protected TextMeshProUGUI nextUnlockText;
 
     [Header("Notification")]
     [SerializeField] private TextMeshProUGUI notificationText;
     [SerializeField] private float notificationDuration = 2f;
 
     [Header("Upgrade Panel")]
-    [SerializeField] private Transform upgradeContainer;
-    [SerializeField] private UpgradeSlotUI upgradeSlotPrefab;
+    [SerializeField] private UpgradeSlotUI[] upgradeSlots;
 
     [Header("Floating Text")]
-    [SerializeField] private FloatingTextUI floatingTextPrefabs;
+    [SerializeField] private FloatingTextUI floatingTextPrefab;
     [SerializeField] private RectTransform floatingTextParent;
     [SerializeField] private RectTransform shipClickArea;
 
     [Header("Settings Panel")]
     [SerializeField] private GameObject settingsPanel;
 
-    private readonly Dictionary<string, UpgradeSlotUI> _slots = new();
     private Coroutine _notifCoroutine;
 
     private void Awake()
@@ -46,12 +43,29 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        
+        var gm = GameManager.Instance;
+        gm.OnCoinChanged += UpdateCoins;
+        gm.OnCoinPerClickChanged += UpdateCoinsPerClick;
+        gm.OnCoinPerSecondChanged += UpdateCoinsPerSecond;
+        gm.OnUpgradesChanged += RefreshAllSlots;
+
+        var um = UpgradeManager.Instance;
+        um.OnUnlocksChanged += RefreshAllSlots;
+        um.OnUpgradePurchased += OnUpgradeBought;
+
+        if (settingsPanel) settingsPanel.SetActive(false);
+
+        InitSlots();
+        RefreshAllSlots();
     }
 
     private void OnDestroy()
     {
         if (!GameManager.Instance) return;
+        GameManager.Instance.OnCoinChanged -= UpdateCoins;
+        GameManager.Instance.OnCoinPerClickChanged -= UpdateCoinsPerClick;
+        GameManager.Instance.OnCoinPerSecondChanged -= UpdateCoinsPerSecond;
+        GameManager.Instance.OnUpgradesChanged -= RefreshAllSlots;
     }
 
     private void UpdateCoins(double v)
@@ -59,7 +73,7 @@ public class UIManager : MonoBehaviour
         if (coinsText) coinsText.text = $"${GameManager.FormatNumber(v)}";
         if (totalEarnedText) totalEarnedText.text = $"Total Earned: {GameManager.FormatNumber(GameManager.Instance.TotalCoinEarned)}";
         if (totalClicksText) totalClicksText.text = $"Click: {GameManager.FormatNumber(GameManager.Instance.TotalClicks)}";
-        UpdateUnlockProgression();
+        UpdateNextUnlockText();
     }
 
     private void UpdateCoinsPerClick(double v)
@@ -79,59 +93,90 @@ public class UIManager : MonoBehaviour
         UpdateCoinsPerSecond(GameManager.Instance.CoinsPerSecond);
     }
 
-    private void UpdateUnlockProgression()
+    private void UpdateNextUnlockText()
     {
-        if (!progressSlider || !progressLabel) return;
+        if (!nextUnlockText) return;
 
-        var um = UpgradeManager.Instance;
         double earned = GameManager.Instance.TotalCoinEarned;
-        var next = um.GetAllRuntimeUpgrades().Find(r => !r.unlocked);
+        var next = UpgradeManager.Instance.GetAllRuntimeUpgrades()
+            .Find(r => !r.unlocked);
 
         if (next == null)
         {
-            progressLabel.text = "All upgrades unlocked!";
-            progressSlider.value = 1f;
+            nextUnlockText.text = "All upgrades unlocked!";
             return;
         }
 
-        float pct = (float)(earned / next.definition.unlockAtCoinsEarned);
-        progressSlider.value = Mathf.Clamp01(pct);
-        progressLabel.text = $"Next: {next.definition.upgradeName} {(pct * 100f):F0}%";
+        float pct = Mathf.Clamp01((float)(earned / next.definition.unlockAtCoinsEarned));
+        nextUnlockText.text = $"Next: {next.definition.upgradeName} ({pct * 100f:F0}%)";
     }
 
-    private void RebuildUpgradeList()
+    private void InitSlots()
     {
-        foreach (Transform child in upgradeContainer) Destroy(child.gameObject);
-        _slots.Clear();
+        if (upgradeSlots == null) return;
 
-        foreach (var rt in UpgradeManager.Instance.GetUnlockedUpgrades())
+        var all = UpgradeManager.Instance.GetAllRuntimeUpgrades();
+
+        for (int i = 0; i < upgradeSlots.Length; i++)
         {
-            var slot = Instantiate(upgradeSlotPrefab, upgradeContainer);
-            slot.Setup(rt);
-            _slots[rt.definition.upgradeId] = slot;
+            var slot = upgradeSlots[i];
+            if (slot == null) continue;
+
+            if (i < all.Count)
+            {
+                slot.Setup(all[i]);
+                slot.gameObject.SetActive(all[i].unlocked);
+            }
+            else
+            {
+                slot.gameObject.SetActive(false);
+            }
         }
     }
 
     private void RefreshAllSlots()
     {
-        foreach (var slot in _slots.Values) slot.Refresh();
+        if (upgradeSlots == null) return;
+
+        var all = UpgradeManager.Instance.GetAllRuntimeUpgrades();
+
+        for (int i = 0; i < upgradeSlots.Length; i++)
+        {
+            var slot = upgradeSlots[i];
+            if (slot == null) continue;
+
+            if (i < all.Count)
+            {
+                slot.gameObject.SetActive(all[i].unlocked);
+                slot.Refresh();
+            }
+        }
+
+        UpdateNextUnlockText();
     }
 
     private void OnUpgradeBought(RuntimeUpgrade rt)
     {
-        if (_slots.TryGetValue(rt.definition.upgradeId, out var slot)) slot.Refresh();
+        if (upgradeSlots == null) return;
+        foreach (var slot in upgradeSlots)
+        {
+            if (slot != null && slot.BoundUpgradeId == rt.definition.upgradeId)
+            {
+                slot.Refresh();
+                break;
+            }
+        }
     }
 
     public void ShowFloatingText(string text)
     {
-        if (!floatingTextPrefabs || !floatingTextParent) return;
-        var ft = Instantiate(floatingTextPrefabs, floatingTextParent);
+        if (!floatingTextPrefab || !floatingTextParent) return;
+        var ft = Instantiate(floatingTextPrefab, floatingTextParent);
         Vector2 rnd = new Vector2(Random.Range(-50f, 50f), Random.Range(-15f, 15f));
         if (shipClickArea)
-        {
-            ft.GetComponent<RectTransform>().anchoredPosition = shipClickArea.anchoredPosition + rnd;
-            ft.Play(text);
-        }
+            ft.GetComponent<RectTransform>().anchoredPosition =
+                shipClickArea.anchoredPosition + rnd;
+        ft.Play(text);
     }
 
     public void ShowNotification(string message)

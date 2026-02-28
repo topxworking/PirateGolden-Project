@@ -16,6 +16,8 @@ public class UpgradeSlotUI : MonoBehaviour
 
     private RuntimeUpgrade _runtime;
 
+    public string BoundUpgradeId => _runtime?.definition?.upgradeId;
+
     private void Awake()
     {
         buyButton?.onClick.AddListener(OnBuyClicked);

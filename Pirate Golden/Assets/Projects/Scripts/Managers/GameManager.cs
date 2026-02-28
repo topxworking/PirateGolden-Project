@@ -79,6 +79,8 @@ public class GameManager : MonoBehaviour
         UpgradeManager.Instance?.CheckUnlocks();
     }
 
+    public void InvokeUpgradesChanged() => OnUpgradesChanged?.Invoke();
+
     public bool SpendCoins(double amount)
     {
         if (TotalCoins < amount) return false;

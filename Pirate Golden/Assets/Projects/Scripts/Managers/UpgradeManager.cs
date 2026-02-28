@@ -55,7 +55,7 @@ public class UpgradeManager : MonoBehaviour
 
         rt.level++;
         GameManager.Instance.RecalculateStats();
-        GameManager.Instance.OnUpgradesChanged?.Invoke();
+        GameManager.Instance.InvokeUpgradesChanged();
         OnUpgradePurchased?.Invoke(rt);
         Debug.Log($"[UpgradeManager] '{rt.definition.upgradeName}' > level {rt.level}");
         return true;
@@ -78,7 +78,7 @@ public class UpgradeManager : MonoBehaviour
         if (change) OnUnlocksChanged?.Invoke();
     }
 
-    public List<RuntimeUpgrade> GetAllRuntimeUpgrades() = _runtimeUpgrades;
+    public List<RuntimeUpgrade> GetAllRuntimeUpgrades() => _runtimeUpgrades;
     public List<RuntimeUpgrade> GetUnlockedUpgrades() => _runtimeUpgrades.FindAll(u => u.unlocked);
     public RuntimeUpgrade GetRuntime(string id) => _runtimeUpgrades.Find(u => u.definition.upgradeId == id);
 

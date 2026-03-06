@@ -20,5 +20,5 @@ MonoBehaviour:
   baseValue: 3
   baseCost: 800
   costMultiplier: 1.15
-  maxLevel: 50
+  maxLevel: 20
   unlockAtCoinsEarned: 300

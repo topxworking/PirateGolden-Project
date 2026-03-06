@@ -17,12 +17,21 @@ public class GameManager : MonoBehaviour
     public double TotalClicks { get; private set; }
 
     public int RebirthCount { get; private set; }
-    public double RebirthMultiplier { get; private set; } = 1.0;
-    public bool CanRebirth => UpgradeManager.Instance != null &&
-        UpgradeManager.Instance.GetAllRuntimeUpgrades()
-        .TrueForAll(r => r.unlocked);
+    public double RebirthMultiplier { get; private set; } = 2.0;
+    public bool CanRebirth
+    {
+        get
+        {
+            if (TotalCoins < NextRebirthCost) return false;
+            return UpgradeManager.Instance.GetAllRuntimeUpgrades()
+                .TrueForAll(r => r.IsMaxLevel);
+        }
+    }
 
     public event Action OnRebirthChanged;
+
+    private const double BASE_REBIRTH_COST = 100000;
+    public double NextRebirthCost => BASE_REBIRTH_COST * Math.Pow(10, RebirthCount);
 
     private double _clickMultipliers = 1.0;
     private double _passiveMultipliers = 1.0;
@@ -116,7 +125,6 @@ public class GameManager : MonoBehaviour
     public void SaveGame()
     {
         if (SaveManager.Instance == null) return;
-
         var data = new GameData
         {
             totalCoins = TotalCoins,
@@ -128,7 +136,6 @@ public class GameManager : MonoBehaviour
             rebirthCount = RebirthCount,
             rebirthMultiplier = RebirthMultiplier
         };
-
         SaveManager.Instance.Save(data);
         UIManager.Instance?.ShowNotification("Game Saved.");
     }
@@ -161,6 +168,8 @@ public class GameManager : MonoBehaviour
         TotalCoins = 0;
         TotalCoinEarned = 0;
         TotalClicks = 0;
+        RebirthCount = 0;
+        RebirthMultiplier = 2.0;
 
         RecalculateStats();
 
@@ -168,6 +177,7 @@ public class GameManager : MonoBehaviour
         OnCoinPerClickChanged?.Invoke(CoinsPerClick);
         OnCoinPerSecondChanged?.Invoke(CoinsPerSecond);
         OnUpgradesChanged?.Invoke();
+        OnRebirthChanged?.Invoke();
     }
 
     public static string FormatNumber(double value)
@@ -181,13 +191,18 @@ public class GameManager : MonoBehaviour
 
     public void Rebirth()
     {
+        Debug.Log($"TotalCoins: {TotalCoins} | NextRebirthCost: {NextRebirthCost}");
+        foreach (var rt in UpgradeManager.Instance.GetAllRuntimeUpgrades())
+            Debug.Log($"{rt.definition.upgradeName} | Lv:{rt.level}/{rt.definition.maxLevel} | IsMaxLevel:{rt.IsMaxLevel}");
+
         if (!CanRebirth) return;
 
+        SpendCoins(NextRebirthCost);
+
         RebirthCount++;
-        RebirthMultiplier = 1.0 + (RebirthCount * 0.5);
+        RebirthMultiplier = 2.0 + (RebirthCount * 1);
 
         UpgradeManager.Instance?.ResetAllUpgrades();
-        SaveManager.Instance?.ResetSave();
 
         TotalCoins = 0;
         TotalCoinEarned = 0;
@@ -202,7 +217,13 @@ public class GameManager : MonoBehaviour
         OnRebirthChanged?.Invoke();
 
         SaveGame();
+        Debug.Log($"Rebirth #{RebirthCount} | Multiplier: x{RebirthMultiplier} | Next cost: {FormatNumber(NextRebirthCost)}");
+    }
 
-        Debug.Log($"Rebirth #{RebirthCount} | Multiplier: x{RebirthMultiplier}");
+    public void CheatAddCoins(double amount)
+    {
+        if (amount <= 0) return;
+        AddCoins(amount);
+        Debug.Log($"[Cheat] Added {FormatNumber(amount)} coins");
     }
 }

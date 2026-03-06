@@ -1,8 +1,9 @@
-using TMPro;
-using System.Collections.Generic;
 using System.Collections;
-using UnityEngine.UI;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -46,6 +47,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject rebirthButton;
     [SerializeField] private TextMeshProUGUI rebirthCountText;
 
+    [Header("Cheat")]
+    [SerializeField] private TMP_InputField cheatInputField;
+
     private Coroutine _notifCoroutine;
 
     private void Awake()
@@ -78,6 +82,9 @@ public class UIManager : MonoBehaviour
 
         GameManager.Instance.OnRebirthChanged += OnRebirthUpdated;
         if (rebirthButton) rebirthButton.SetActive(false);
+
+        if (cheatInputField)
+            cheatInputField.onSubmit.AddListener(OnCheatSubmit);
 
         InitSlots();
     }
@@ -308,12 +315,23 @@ public class UIManager : MonoBehaviour
         {
             int next = GameManager.Instance.RebirthCount + 1;
             double nextMult = 1.0 + (next * 0.5);
-            rebirthCountText.text = $"REBIRTH #{next}\n×{nextMult:F1} All";
+            rebirthCountText.text = $"REBIRTH #{next} ×{nextMult:F1} All";
         }
     }
 
     public void OnRebirthButtonClicked()
     {
         GameManager.Instance.Rebirth();
+    }
+
+    private void OnCheatSubmit(string value)
+    {
+        if (double.TryParse(value, out double amount))
+        {
+            GameManager.Instance.CheatAddCoins(amount);
+            ShowNotification($"Cheat: +${GameManager.FormatNumber(amount)}");
+        }
+        cheatInputField.SetTextWithoutNotify("");
+        cheatInputField.DeactivateInputField();
     }
 }

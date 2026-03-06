@@ -68,18 +68,28 @@ public class UpgradeSlotUI : MonoBehaviour
             var def = _runtime.definition;
             double curVal = def.GetValueAtLevel(_runtime.level);
             double nextVal = maxed ? curVal : def.GetValueAtLevel(_runtime.level + 1);
-            string typeLebel = def.upgradeType switch
+
+            string typeLabel = def.upgradeType switch
             {
                 UpgradeType.ClickPower => "Click +",
                 UpgradeType.PassiveIncome => "Income/s +",
-                UpgradeType.ClickMultiplier => "Click ×+",
+                UpgradeType.ClickMultiplier => "Click ×",
                 UpgradeType.PassiveMultiplier => "Income ×+",
                 _ => ""
             };
 
-            effectText.text = maxed
-                ? $"{typeLebel}{GameManager.FormatNumber(curVal)}"
-                : $"{typeLebel}{GameManager.FormatNumber(curVal)} > {GameManager.FormatNumber(nextVal)}";
+            if (def.upgradeType == UpgradeType.ClickMultiplier || def.upgradeType == UpgradeType.PassiveMultiplier)
+            {
+                effectText.text = maxed
+                    ? $"{typeLabel}{GameManager.FormatNumber(1 + curVal)}"
+                    : $"{typeLabel}{GameManager.FormatNumber(1 + curVal)} > {GameManager.FormatNumber(1 + nextVal)}";
+            }
+            else
+            {
+                effectText.text = maxed
+                    ? $"{typeLabel}{GameManager.FormatNumber(curVal)}"
+                    : $"{typeLabel}{GameManager.FormatNumber(curVal)} > {GameManager.FormatNumber(nextVal)}";
+            }
         }
     }
 

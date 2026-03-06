@@ -42,6 +42,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject mainMenuPanel;
     [SerializeField] private float slideSpeed = 800f;
 
+    [Header("Rebirth")]
+    [SerializeField] private GameObject rebirthButton;
+    [SerializeField] private TextMeshProUGUI rebirthCountText;
+
     private Coroutine _notifCoroutine;
 
     private void Awake()
@@ -72,6 +76,9 @@ public class UIManager : MonoBehaviour
 
         if (exitPanel) exitPanel.SetActive(false);
 
+        GameManager.Instance.OnRebirthChanged += OnRebirthUpdated;
+        if (rebirthButton) rebirthButton.SetActive(false);
+
         InitSlots();
     }
 
@@ -82,6 +89,9 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.OnCoinPerClickChanged -= UpdateCoinsPerClick;
         GameManager.Instance.OnCoinPerSecondChanged -= UpdateCoinsPerSecond;
         GameManager.Instance.OnUpgradesChanged -= RefreshAllSlots;
+
+        if (GameManager.Instance)
+            GameManager.Instance.OnRebirthChanged -= OnRebirthUpdated;
     }
 
     private void UpdateCoins(double v)
@@ -176,6 +186,7 @@ public class UIManager : MonoBehaviour
 
         UpdateNextUnlockText();
         UpdateUpgradesCount();
+        UpdateRebirthButton();
     }
 
     private void OnUpgradeBought(RuntimeUpgrade rt)
@@ -193,7 +204,12 @@ public class UIManager : MonoBehaviour
 
     public void ShowFloatingText(string text)
     {
-        if (!floatingTextPrefab || !floatingTextParent) return;
+        Debug.Log($"ShowFloatingText called: {text}");
+        if (!floatingTextPrefab || !floatingTextParent)
+        {
+            Debug.LogWarning("FloatingText prefab or parent is null!");
+            return;
+        }
         var ft = Instantiate(floatingTextPrefab, floatingTextParent);
         Vector2 rnd = new Vector2(Random.Range(-50f, 50f), Random.Range(-15f, 15f));
         if (shipClickArea)
@@ -274,5 +290,30 @@ public class UIManager : MonoBehaviour
 
         mainMenuPanel.SetActive(false);
         RefreshAll();
+    }
+
+    private void OnRebirthUpdated()
+    {
+        UpdateRebirthButton();
+        RefreshAll();
+    }
+
+    private void UpdateRebirthButton()
+    {
+        if (!rebirthButton) return;
+        bool canRebirth = GameManager.Instance.CanRebirth;
+        rebirthButton.SetActive(canRebirth);
+
+        if (rebirthCountText && canRebirth)
+        {
+            int next = GameManager.Instance.RebirthCount + 1;
+            double nextMult = 1.0 + (next * 0.5);
+            rebirthCountText.text = $"REBIRTH #{next}\n×{nextMult:F1} All";
+        }
+    }
+
+    public void OnRebirthButtonClicked()
+    {
+        GameManager.Instance.Rebirth();
     }
 }

@@ -10,6 +10,9 @@ public class GameData
     public double totalCoinsEarned;
     public double totalClicks;
     public List<UpgradeSaveData> upgrades = new List<UpgradeSaveData>();
+
+    public int rebirthCount;
+    public double rebirthMultiplier;
 }
 
 [Serializable]

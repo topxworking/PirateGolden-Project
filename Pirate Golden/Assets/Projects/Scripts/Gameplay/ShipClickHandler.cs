@@ -11,6 +11,10 @@ public class ShipClickHandler : MonoBehaviour, IPointerClickHandler, IPointerDow
     [SerializeField] private float punchAmount = 0.13f;
     [SerializeField] private float punchSpeed = 12f;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip clickSound;
+
     private Vector3 _baseScale;
     private bool _punching;
     private float _punchT;
@@ -51,5 +55,6 @@ public class ShipClickHandler : MonoBehaviour, IPointerClickHandler, IPointerDow
     {
         if (usePunchScale) { _punching = true; _punchT = 0f; }
         if (splashParticle) splashParticle.Play();
+        if (audioSource && clickSound) audioSource.PlayOneShot(clickSound);
     }
 }

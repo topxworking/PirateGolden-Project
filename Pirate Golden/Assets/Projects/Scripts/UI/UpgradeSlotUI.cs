@@ -14,6 +14,10 @@ public class UpgradeSlotUI : MonoBehaviour
     [SerializeField] private Button buyButton;
     [SerializeField] private GameObject maxBadge;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip upgradeSound;
+
     private RuntimeUpgrade _runtime;
 
     public string BoundUpgradeId => _runtime?.definition?.upgradeId;
@@ -104,6 +108,9 @@ public class UpgradeSlotUI : MonoBehaviour
     {
         if (_runtime == null) return;
         if (UpgradeManager.Instance.TryBuyUpgrade(_runtime.definition.upgradeId))
+        {
+            if (audioSource && upgradeSound) audioSource.PlayOneShot(upgradeSound);
             Refresh();
+        }
     }
 }

@@ -1,16 +1,21 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Renderer))]
 public class WaterScrolling : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [Header("Scroll Speed")]
+    [SerializeField] private float speedX = 0.04f;
+    [SerializeField] private float speedY = 0.0f;
 
-    // Update is called once per frame
-    void Update()
+    private Material _mat;
+    private Vector2 _offset;
+
+    private void Start() => _mat = GetComponent<Renderer>().material;
+
+    private void Update()
     {
-        
+        _offset.x += speedX * Time.deltaTime;
+        _offset.y += speedY * Time.deltaTime;
+        _mat.SetTextureOffset("_MainTex", _offset);
     }
 }

@@ -50,6 +50,10 @@ public class UIManager : MonoBehaviour
     [Header("Cheat")]
     [SerializeField] private TMP_InputField cheatInputField;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip playbuttonSound;
+
     private Coroutine _notifCoroutine;
 
     private void Awake()
@@ -282,6 +286,7 @@ public class UIManager : MonoBehaviour
     public void OnPlayButtonClicked()
     {
         StartCoroutine(SlideUpAndHide());
+        if (audioSource && playbuttonSound) audioSource.PlayOneShot(playbuttonSound);
     }
 
     private IEnumerator SlideUpAndHide()

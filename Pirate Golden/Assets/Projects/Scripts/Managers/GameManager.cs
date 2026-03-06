@@ -19,14 +19,7 @@ public class GameManager : MonoBehaviour
     private double _clickMultipliers = 1.0;
     private double _passiveMultipliers = 1.0;
 
-    [Header("Auto Save")]
-    [SerializeField] private float autoSaveInterval = 30f;
-
-    [Header("Passive Tick")]
-    [SerializeField] private float passiveTickRate = 1f;
-
     private float _passiveTimer;
-    private float _autoSaveTimer;
 
     private void Awake()
     {
@@ -44,19 +37,10 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         _passiveTimer += Time.deltaTime;
-        while (_passiveTimer >= passiveTickRate)
+        if (_passiveTimer >= 1f)
         {
-            double earned = CoinsPerSecond * passiveTickRate;
-            if (earned > 0) AddCoins(earned);
-
-            _passiveTimer -= passiveTickRate;
-        }
-
-        _autoSaveTimer += Time.deltaTime;
-        if (_autoSaveTimer >= autoSaveInterval)
-        {
-            SaveGame();
-            _autoSaveTimer = 0f;
+            if (CoinsPerSecond > 0) AddCoins(CoinsPerSecond);
+            _passiveTimer -= 1f;
         }
     }
 

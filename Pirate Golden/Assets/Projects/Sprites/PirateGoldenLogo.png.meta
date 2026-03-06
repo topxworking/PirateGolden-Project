@@ -1,0 +1,832 @@
+fileFormatVersion: 2
+guid: 8610558d3d67cd14199c55bf75471a30
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1415517920698607815
+    second: PirateGoldenLogo_0
+  - first:
+      213: 4176808578462251643
+    second: PirateGoldenLogo_1
+  - first:
+      213: 606104198125173894
+    second: PirateGoldenLogo_2
+  - first:
+      213: -6634507016695029932
+    second: PirateGoldenLogo_3
+  - first:
+      213: 6638947027259726545
+    second: PirateGoldenLogo_4
+  - first:
+      213: 7682914143439366852
+    second: PirateGoldenLogo_5
+  - first:
+      213: 8364349673083470462
+    second: PirateGoldenLogo_6
+  - first:
+      213: -7488127483296621696
+    second: PirateGoldenLogo_7
+  - first:
+      213: 8019372429049797504
+    second: PirateGoldenLogo_8
+  - first:
+      213: -7237193040437758013
+    second: PirateGoldenLogo_9
+  - first:
+      213: -2945597166969683537
+    second: PirateGoldenLogo_10
+  - first:
+      213: 7079643056054882005
+    second: PirateGoldenLogo_11
+  - first:
+      213: -8118293134554779784
+    second: PirateGoldenLogo_12
+  - first:
+      213: 1663630172245820405
+    second: PirateGoldenLogo_13
+  - first:
+      213: 2509880638796682691
+    second: PirateGoldenLogo_14
+  - first:
+      213: 1383310276273700649
+    second: PirateGoldenLogo_15
+  - first:
+      213: -1609026920992914646
+    second: PirateGoldenLogo_16
+  - first:
+      213: 9103728470070846158
+    second: PirateGoldenLogo_17
+  - first:
+      213: 1160859658093204826
+    second: PirateGoldenLogo_18
+  - first:
+      213: 5418412476406064859
+    second: PirateGoldenLogo_19
+  - first:
+      213: 4110938235229060109
+    second: PirateGoldenLogo_20
+  - first:
+      213: -6094989667621825523
+    second: PirateGoldenLogo_21
+  - first:
+      213: 3475081536998914672
+    second: PirateGoldenLogo_22
+  - first:
+      213: -3954284545185844771
+    second: PirateGoldenLogo_23
+  - first:
+      213: -629135012528466224
+    second: PirateGoldenLogo_24
+  - first:
+      213: -8863370150943472657
+    second: PirateGoldenLogo_25
+  - first:
+      213: -1804470196576354672
+    second: PirateGoldenLogo_26
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PirateGoldenLogo_0
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 609
+        width: 82
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9375f8b63f11b5ce0800000000000000
+      internalID: -1415517920698607815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PirateGoldenLogo_1
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 730
+        width: 33
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7afb0eb54107f930800000000000000
+      internalID: 4176808578462251643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PirateGoldenLogo_2
+      rect:
+        serializedVersion: 2
+        x: 584
+        y: 614
+        width: 48
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68cbf129e80596800800000000000000
+      internalID: 606104198125173894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PirateGoldenLogo_3
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 323
+        width: 137
+        height: 295
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45f5e0af40f7de3a0800000000000000
+      internalID: -6634507016695029932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PirateGoldenLogo_4
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 323
+        width: 85
+        height: 295
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1da937a8527422c50800000000000000
+      internalID: 6638947027259726545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PirateGoldenLogo_5
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 614
+        width: 47
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ca278725b13f9a60800000000000000
+      internalID: 7682914143439366852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PirateGoldenLogo_6
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 614
+        width: 75
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e728b4126b3241470800000000000000
+      internalID: 8364349673083470462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PirateGoldenLogo_7
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 323
+        width: 151
+        height: 405
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08bd34d4ab3d41890800000000000000
+      internalID: -7488127483296621696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PirateGoldenLogo_8
+      rect:
+        serializedVersion: 2
+        x: 631
+        y: 614
+        width: 70
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08b131b5cb88a4f60800000000000000
+      internalID: 8019372429049797504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PirateGoldenLogo_9
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 323
+        width: 133
+        height: 221
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c737c52643509b90800000000000000
+      internalID: -7237193040437758013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PirateGoldenLogo_10
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 323
+        width: 132
+        height: 221
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa1006babf22f17d0800000000000000
+      internalID: -2945597166969683537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PirateGoldenLogo_11
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 323
+        width: 167
+        height: 221
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5de46b499d1ff3260800000000000000
+      internalID: 7079643056054882005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PirateGoldenLogo_12
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 256
+        width: 41
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87fae5c1867065f80800000000000000
+      internalID: -8118293134554779784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PirateGoldenLogo_13
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 256
+        width: 74
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f3855ec3d6661710800000000000000
+      internalID: 1663630172245820405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PirateGoldenLogo_14
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 256
+        width: 42
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c55b10a423e4d220800000000000000
+      internalID: 2509880638796682691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PirateGoldenLogo_15
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 255
+        width: 28
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92ff07ffd51823310800000000000000
+      internalID: 1383310276273700649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PirateGoldenLogo_16
+      rect:
+        serializedVersion: 2
+        x: 354
+        y: 256
+        width: 44
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a234d245a869ba9e0800000000000000
+      internalID: -1609026920992914646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PirateGoldenLogo_17
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 256
+        width: 75
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec2ee265fc0f65e70800000000000000
+      internalID: 9103728470070846158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PirateGoldenLogo_18
+      rect:
+        serializedVersion: 2
+        x: 488
+        y: 255
+        width: 42
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a551ab265b33c1010800000000000000
+      internalID: 1160859658093204826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PirateGoldenLogo_19
+      rect:
+        serializedVersion: 2
+        x: 532
+        y: 256
+        width: 32
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd66ab67071123b40800000000000000
+      internalID: 5418412476406064859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PirateGoldenLogo_20
+      rect:
+        serializedVersion: 2
+        x: 579
+        y: 256
+        width: 40
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0c36645b8cfc0930800000000000000
+      internalID: 4110938235229060109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PirateGoldenLogo_21
+      rect:
+        serializedVersion: 2
+        x: 620
+        y: 256
+        width: 42
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0499bf903f3a6ba0800000000000000
+      internalID: -6094989667621825523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PirateGoldenLogo_22
+      rect:
+        serializedVersion: 2
+        x: 663
+        y: 256
+        width: 35
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07ab6520f38f93030800000000000000
+      internalID: 3475081536998914672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PirateGoldenLogo_23
+      rect:
+        serializedVersion: 2
+        x: 712
+        y: 256
+        width: 42
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd17167282f8f19c0800000000000000
+      internalID: -3954284545185844771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PirateGoldenLogo_24
+      rect:
+        serializedVersion: 2
+        x: 756
+        y: 256
+        width: 35
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d6da761a0dd447f0800000000000000
+      internalID: -629135012528466224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PirateGoldenLogo_25
+      rect:
+        serializedVersion: 2
+        x: 791
+        y: 256
+        width: 34
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe3c630decbfef480800000000000000
+      internalID: -8863370150943472657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PirateGoldenLogo_26
+      rect:
+        serializedVersion: 2
+        x: 826
+        y: 256
+        width: 32
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09e794daaeb35f6e0800000000000000
+      internalID: -1804470196576354672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      PirateGoldenLogo_0: -1415517920698607815
+      PirateGoldenLogo_1: 4176808578462251643
+      PirateGoldenLogo_10: -2945597166969683537
+      PirateGoldenLogo_11: 7079643056054882005
+      PirateGoldenLogo_12: -8118293134554779784
+      PirateGoldenLogo_13: 1663630172245820405
+      PirateGoldenLogo_14: 2509880638796682691
+      PirateGoldenLogo_15: 1383310276273700649
+      PirateGoldenLogo_16: -1609026920992914646
+      PirateGoldenLogo_17: 9103728470070846158
+      PirateGoldenLogo_18: 1160859658093204826
+      PirateGoldenLogo_19: 5418412476406064859
+      PirateGoldenLogo_2: 606104198125173894
+      PirateGoldenLogo_20: 4110938235229060109
+      PirateGoldenLogo_21: -6094989667621825523
+      PirateGoldenLogo_22: 3475081536998914672
+      PirateGoldenLogo_23: -3954284545185844771
+      PirateGoldenLogo_24: -629135012528466224
+      PirateGoldenLogo_25: -8863370150943472657
+      PirateGoldenLogo_26: -1804470196576354672
+      PirateGoldenLogo_3: -6634507016695029932
+      PirateGoldenLogo_4: 6638947027259726545
+      PirateGoldenLogo_5: 7682914143439366852
+      PirateGoldenLogo_6: 8364349673083470462
+      PirateGoldenLogo_7: -7488127483296621696
+      PirateGoldenLogo_8: 8019372429049797504
+      PirateGoldenLogo_9: -7237193040437758013
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

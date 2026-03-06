@@ -38,6 +38,10 @@ public class UIManager : MonoBehaviour
     [Header("Exit Panel")]
     [SerializeField] private GameObject exitPanel;
 
+    [Header("Main Menu")]
+    [SerializeField] private GameObject mainMenuPanel;
+    [SerializeField] private float slideSpeed = 800f;
+
     private Coroutine _notifCoroutine;
 
     private void Awake()
@@ -48,6 +52,14 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        if (mainMenuPanel) mainMenuPanel.SetActive(true);
+
+        if (mainMenuPanel)
+        {
+            var rt = mainMenuPanel.GetComponent<RectTransform>();
+            rt.anchoredPosition = Vector2.zero;
+        }
+
         var gm = GameManager.Instance;
         gm.OnCoinChanged += UpdateCoins;
         gm.OnCoinPerClickChanged += UpdateCoinsPerClick;
@@ -242,5 +254,25 @@ public class UIManager : MonoBehaviour
     public void OnExitCancel()
     {
         if (exitPanel) exitPanel.SetActive(false);
+    }
+
+    public void OnPlayButtonClicked()
+    {
+        StartCoroutine(SlideUpAndHide());
+    }
+
+    private IEnumerator SlideUpAndHide()
+    {
+        RectTransform rt = mainMenuPanel.GetComponent<RectTransform>();
+        float targetY = Screen.height * 1.2f;
+
+        while (rt.anchoredPosition.y < targetY)
+        {
+            rt.anchoredPosition += Vector2.up * slideSpeed * Time.deltaTime;
+            yield return null;
+        }
+
+        mainMenuPanel.SetActive(false);
+        RefreshAll();
     }
 }

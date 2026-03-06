@@ -35,6 +35,9 @@ public class UIManager : MonoBehaviour
     [Header("Stats Panel")]
     [SerializeField] private TextMeshProUGUI upgradesCountText;
 
+    [Header("Exit Panel")]
+    [SerializeField] private GameObject exitPanel;
+
     private Coroutine _notifCoroutine;
 
     private void Awake()
@@ -54,6 +57,8 @@ public class UIManager : MonoBehaviour
         var um = UpgradeManager.Instance;
         um.OnUnlocksChanged += RefreshAllSlots;
         um.OnUpgradePurchased += OnUpgradeBought;
+
+        if (exitPanel) exitPanel.SetActive(false);
 
         InitSlots();
     }
@@ -221,5 +226,21 @@ public class UIManager : MonoBehaviour
         int unlocked = UpgradeManager.Instance.GetUnlockedUpgrades().Count;
         int total = UpgradeManager.Instance.GetAllRuntimeUpgrades().Count;
         upgradesCountText.text = $"{unlocked}/{total}";
+    }
+
+    public void OnExitButtonClicked()
+    {
+        if (exitPanel) exitPanel.SetActive(true);
+    }
+
+    public void OnExitConfirm()
+    {
+        GameManager.Instance.SaveGame();
+        Application.Quit();
+    }
+
+    public void OnExitCancel()
+    {
+        if (exitPanel) exitPanel.SetActive(false);
     }
 }

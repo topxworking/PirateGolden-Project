@@ -153,12 +153,26 @@ public class GameManager : MonoBehaviour
         RecalculateStats();
 
         OnCoinChanged?.Invoke(TotalCoins);
+        OnCoinPerClickChanged?.Invoke(CoinsPerClick);
+        OnCoinPerSecondChanged?.Invoke(CoinsPerSecond);
+        OnUpgradesChanged?.Invoke();
     }
 
     public void ResetGame()
     {
-        SaveManager.Instance?.DeleteSave();
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        UpgradeManager.Instance?.ResetAllUpgrades();
+        SaveManager.Instance?.ResetSave();
+
+        TotalCoins = 0;
+        TotalCoinEarned = 0;
+        TotalClicks = 0;
+
+        RecalculateStats();
+
+        OnCoinChanged?.Invoke(TotalCoins);
+        OnCoinPerClickChanged?.Invoke(CoinsPerClick);
+        OnCoinPerSecondChanged?.Invoke(CoinsPerSecond);
+        OnUpgradesChanged?.Invoke();
     }
 
     public static string FormatNumber(double value)

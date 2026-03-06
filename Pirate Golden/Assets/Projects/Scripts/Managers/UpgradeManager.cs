@@ -99,4 +99,15 @@ public class UpgradeManager : MonoBehaviour
             if (rt != null) { rt.level = saved.level; rt.unlocked = saved.unlocked; }
         }
     }
+
+    public void ResetAllUpgrades()
+    {
+        foreach (var rt in _runtimeUpgrades)
+        {
+            rt.level = 0;
+            rt.unlocked = rt.definition.unlockAtCoinsEarned <= 0;
+        }
+        OnUnlocksChanged?.Invoke();
+        Debug.Log("All upgrades reset.");
+    }
 }

@@ -44,9 +44,7 @@ public class UpgradeSlotUI : MonoBehaviour
 
         if (levelText)
         {
-            string cap = _runtime.definition.maxLevel > 0
-                ? $"/{_runtime.definition.maxLevel}" : "";
-            levelText.text = $"Level {_runtime.level}{cap}";
+            levelText.text = $"Lv.{_runtime.level}";
         }
 
         if (maxBadge) maxBadge.SetActive(maxed);
@@ -88,6 +86,7 @@ public class UpgradeSlotUI : MonoBehaviour
     private void Update()
     {
         if (_runtime == null || _runtime.IsMaxLevel || buyButton == null) return;
+        if (GameManager.Instance == null) return;
         buyButton.interactable = GameManager.Instance.TotalCoins >= _runtime.NextCost;
     }
 

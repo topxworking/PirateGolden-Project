@@ -32,8 +32,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private RectTransform floatingTextParent;
     [SerializeField] private RectTransform shipClickArea;
 
-    [Header("Settings Panel")]
-    [SerializeField] private GameObject settingsPanel;
+    [Header("Stats Panel")]
+    [SerializeField] private TextMeshProUGUI upgradesCountText;
 
     private Coroutine _notifCoroutine;
 
@@ -55,11 +55,7 @@ public class UIManager : MonoBehaviour
         um.OnUnlocksChanged += RefreshAllSlots;
         um.OnUpgradePurchased += OnUpgradeBought;
 
-        if (settingsPanel) settingsPanel.SetActive(false);
-
         InitSlots();
-        RefreshAllSlots();
-        RefreshAllHUD();
     }
 
     private void OnDestroy()
@@ -74,19 +70,19 @@ public class UIManager : MonoBehaviour
     private void UpdateCoins(double v)
     {
         if (coinsText) coinsText.text = $"${GameManager.FormatNumber(v)}";
-        if (totalEarnedText) totalEarnedText.text = $"Total Earned: {GameManager.FormatNumber(GameManager.Instance.TotalCoinEarned)}";
-        if (totalClicksText) totalClicksText.text = $"Click: {GameManager.FormatNumber(GameManager.Instance.TotalClicks)}";
+        if (totalEarnedText) totalEarnedText.text = $"{GameManager.FormatNumber(GameManager.Instance.TotalCoinEarned)}";
+        if (totalClicksText) totalClicksText.text = $"{GameManager.FormatNumber(GameManager.Instance.TotalClicks)}";
         UpdateNextUnlockText();
     }
 
     private void UpdateCoinsPerClick(double v)
     {
-        if (coinsPerClickText) coinsPerClickText.text = $"Per Click: {GameManager.FormatNumber(v)}";
+        if (coinsPerClickText) coinsPerClickText.text = $"{GameManager.FormatNumber(v)}";
     }
 
     private void UpdateCoinsPerSecond(double v)
     {
-        if (coinsPerSecondText) coinsPerSecondText.text = $"Per Second: {GameManager.FormatNumber(v)}";
+        if (coinsPerSecondText) coinsPerSecondText.text = $"{GameManager.FormatNumber(v)}";
     }
 
     private void RefreshAllHUD()
@@ -115,7 +111,7 @@ public class UIManager : MonoBehaviour
             (float)(earned / next.definition.unlockAtCoinsEarned));
 
         nextUnlockText.text = $"Next: {next.definition.upgradeName}";
-        percentText.text = $"({pct * 100f:F0}%)";
+        percentText.text = $"{pct * 100f:F0}%";
 
         if (progressFillImage) progressFillImage.fillAmount = pct;
     }
@@ -162,6 +158,7 @@ public class UIManager : MonoBehaviour
         }
 
         UpdateNextUnlockText();
+        UpdateUpgradesCount();
     }
 
     private void OnUpgradeBought(RuntimeUpgrade rt)
@@ -203,11 +200,26 @@ public class UIManager : MonoBehaviour
         notificationText.gameObject.SetActive(false);
     }
 
-    public void ToggleSettings()
+    public void OnSaveButtonClicked() => GameManager.Instance.SaveGame();
+
+    public void RefreshAll()
     {
-        if (settingsPanel) settingsPanel.SetActive(!settingsPanel.activeSelf);
+        RefreshAllHUD();
+        InitSlots();
+        RefreshAllSlots();
     }
 
-    public void OnSaveButtonClicked() => GameManager.Instance.SaveGame();
-    public void OnResetButtonClicked() => GameManager.Instance.ResetGame();
+    public void OnResetButtonClicked()
+    {
+        GameManager.Instance.ResetGame();
+        RefreshAll();
+    }
+
+    private void UpdateUpgradesCount()
+    {
+        if (!upgradesCountText) return;
+        int unlocked = UpgradeManager.Instance.GetUnlockedUpgrades().Count;
+        int total = UpgradeManager.Instance.GetAllRuntimeUpgrades().Count;
+        upgradesCountText.text = $"{unlocked}/{total}";
+    }
 }

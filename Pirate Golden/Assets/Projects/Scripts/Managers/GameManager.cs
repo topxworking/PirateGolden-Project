@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     public double TotalClicks { get; private set; }
 
     public int RebirthCount { get; private set; }
-    public double RebirthMultiplier { get; private set; } = 2.0;
+    public double RebirthMultiplier { get; private set; } = 1.0;
     public bool CanRebirth
     {
         get
@@ -169,7 +169,7 @@ public class GameManager : MonoBehaviour
         TotalCoinEarned = 0;
         TotalClicks = 0;
         RebirthCount = 0;
-        RebirthMultiplier = 2.0;
+        RebirthMultiplier = 1.0;
 
         RecalculateStats();
 
@@ -200,7 +200,7 @@ public class GameManager : MonoBehaviour
         SpendCoins(NextRebirthCost);
 
         RebirthCount++;
-        RebirthMultiplier = 2.0 + (RebirthCount * 1);
+        RebirthMultiplier = Math.Pow(2, RebirthCount);
 
         UpgradeManager.Instance?.ResetAllUpgrades();
 

@@ -17,7 +17,7 @@ MonoBehaviour:
   description: Multiplies coins earned per click
   icon: {fileID: 0}
   upgradeType: 2
-  baseValue: 0.25
+  baseValue: 0.5
   baseCost: 12000
   costMultiplier: 1.18
   maxLevel: 10

@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour
         {
             foreach (var rt in UpgradeManager.Instance.GetAllRuntimeUpgrades())
             {
-                if (rt.level <= 0) continue;
+                if (rt.level < 1) continue;
                 double val = rt.definition.GetValueAtLevel(rt.level);
 
                 switch (rt.definition.upgradeType)

@@ -17,7 +17,7 @@ MonoBehaviour:
   description: Generates coins automatically
   icon: {fileID: 0}
   upgradeType: 1
-  baseValue: 0.5
+  baseValue: 1
   baseCost: 80
   costMultiplier: 1.13
   maxLevel: 20

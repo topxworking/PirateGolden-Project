@@ -50,9 +50,7 @@ public class UpgradeManager : MonoBehaviour
     {
         var rt = GetRuntime(upgradeId);
         if (rt == null || !rt.unlocked || rt.IsMaxLevel) return false;
-
         if (!GameManager.Instance.SpendCoins(rt.NextCost)) return false;
-
         rt.level++;
         GameManager.Instance.RecalculateStats();
         GameManager.Instance.InvokeUpgradesChanged();

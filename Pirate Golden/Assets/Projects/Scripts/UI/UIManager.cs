@@ -215,18 +215,15 @@ public class UIManager : MonoBehaviour
 
     public void ShowFloatingText(string text)
     {
-        Debug.Log($"ShowFloatingText called: {text}");
-        if (!floatingTextPrefab || !floatingTextParent)
-        {
-            Debug.LogWarning("FloatingText prefab or parent is null!");
-            return;
-        }
-        var ft = Instantiate(floatingTextPrefab, floatingTextParent);
-        Vector2 rnd = new Vector2(Random.Range(-50f, 50f), Random.Range(-15f, 15f));
-        if (shipClickArea)
-            ft.GetComponent<RectTransform>().anchoredPosition =
-                shipClickArea.anchoredPosition + rnd;
-        ft.Play(text);
+        if (FloatingTextPool.Instance == null || !floatingTextParent) return;
+
+        var ft = FloatingTextPool.Instance.Get();
+        ft.transform.SetParent(floatingTextParent, false);
+
+        Vector2 rnd = new Vector2(Random.Range(-50, 50), Random.Range(-15, 15));
+        Vector2 pos = shipClickArea ? shipClickArea.anchoredPosition + rnd : rnd;
+
+        ft.Play(text, pos);
     }
 
     public void ShowNotification(string message)

@@ -11,23 +11,35 @@ public class FloatingTextUI : MonoBehaviour
     [SerializeField] private float riseSpeed = 90f;
     [SerializeField] private float lifttime = 1.1f;
 
-    public void Play(string text)
+    private RectTransform _rt;
+
+    private void Awake()
+    {
+        _rt = GetComponent<RectTransform>();
+    }
+
+    public void Play(string text, Vector2 position)
     {
         if (label) label.text = text;
+        _rt.anchoredPosition = position;
+        StopAllCoroutines();
         StartCoroutine(Animate());
     }
 
     private IEnumerator Animate()
     {
-        var rt = GetComponent<RectTransform>();
         float elapsed = 0f;
+        Vector2 startPos = _rt.anchoredPosition;
+
+        if (canvasGroup) canvasGroup.alpha = 1f;
+        _rt.localScale = Vector3.zero;
 
         while (elapsed < lifttime)
         {
             elapsed += Time.deltaTime;
             float t = elapsed / lifttime;
 
-            rt.anchoredPosition += Vector2.up * riseSpeed * Time.deltaTime;
+            _rt.anchoredPosition = startPos + Vector2.up * riseSpeed * elapsed;
 
             if (canvasGroup)
                 canvasGroup.alpha = 1f - Mathf.Clamp01((t - 0.5f) * 2f);
@@ -35,11 +47,11 @@ public class FloatingTextUI : MonoBehaviour
             float scale = t < 0.1f ? Mathf.Lerp(0f, 1.2f, t / 0.1f)
                 : t < 0.2f ? Mathf.Lerp(1.2f, 1f, (t - 0.1f) / 0.1f)
                 : 1f;
-            rt.localScale = Vector3.one * scale;
+            _rt.localScale = Vector3.one * scale;
 
             yield return null;
         }
 
-        Destroy(gameObject);
+        FloatingTextPool.Instance?.Return(this);
     }
 }

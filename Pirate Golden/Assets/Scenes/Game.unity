@@ -1762,6 +1762,7 @@ GameObject:
   m_Component:
   - component: {fileID: 316773181}
   - component: {fileID: 316773182}
+  - component: {fileID: 316773183}
   m_Layer: 0
   m_Name: '[UIManager]'
   m_TagString: Untagged
@@ -1814,7 +1815,7 @@ MonoBehaviour:
   - {fileID: 486238144}
   - {fileID: 641677103}
   - {fileID: 36465105}
-  floatingTextPrefab: {fileID: 6346506809512882286, guid: 9171ac3ba0f29b442b2c37072edec459, type: 3}
+  floatingTextPrefab: {fileID: 0}
   floatingTextParent: {fileID: 1083386072}
   shipClickArea: {fileID: 2137736992}
   upgradesCountText: {fileID: 721260122}
@@ -1826,6 +1827,21 @@ MonoBehaviour:
   cheatInputField: {fileID: 1283243173}
   audioSource: {fileID: 490267400}
   playbuttonSound: {fileID: 8300000, guid: a41cfbb05cd7f2744a35c352b0f7ceb2, type: 3}
+--- !u!114 &316773183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 316773180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17a3ce728485825488a8505b9e721679, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FloatingTextPool
+  prefab: {fileID: 6346506809512882286, guid: 9171ac3ba0f29b442b2c37072edec459, type: 3}
+  parent: {fileID: 1083386072}
+  poolSize: 10
 --- !u!1 &351007774
 GameObject:
   m_ObjectHideFlags: 0
@@ -6082,7 +6098,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1026390844
 MonoBehaviour:
   m_ObjectHideFlags: 0
